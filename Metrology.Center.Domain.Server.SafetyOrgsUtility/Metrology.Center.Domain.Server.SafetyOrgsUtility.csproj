@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{49441F37-959E-4827-80D8-8DD95D790ED8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Metrology.Center.Domain.Server.SafetyOrgsUtility</RootNamespace>
+    <AssemblyName>Metrology.Center.Domain.Server.SafetyOrgsUtility</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.42\lib\net40\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DryIoc, Version=2.0.0.336, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DryIoc.dll.2.0.0-rc3build336\lib\net40\DryIoc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <Compile Include="ApplicationLayer\ISafetyOrgsService.cs" />
+    <Compile Include="DomainLayer\Events\MarkedSafetyEvent.cs" />
+    <Compile Include="DomainLayer\Events\SafetyOrgUpdatedEvent.cs" />
+    <Compile Include="DomainLayer\Events\UnmarkedSafetyEvent.cs" />
+    <Compile Include="Kernel\IEvent.cs" />
+    <Compile Include="DomainLayer\Interfases\ISafetyOrgRepository.cs" />
+    <Compile Include="DomainLayer\DomainItems\SafetyOrgAggregate.cs" />
+    <Compile Include="ApplicationLayer\SafetyOrgsService.cs" />
+    <Compile Include="Infrastructure\SafetyOrgRepository.cs" />
+    <Compile Include="Kernel\IEventHandler.cs" />
+    <Compile Include="Kernel\ServiceBus.cs" />
+    <Compile Include="Kernel\SingletonBase.cs" />
+    <Compile Include="MarkAsSafetyOrgCommandHandler.cs" />
+    <Compile Include="ModuleInitializer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Metrology.Center.Domain.SafetyOrgsUtility\Metrology.Center.Domain.SafetyOrgsUtility.csproj">
+      <Project>{a6e58886-2592-4b9f-8eef-ab727d2b30bc}</Project>
+      <Name>Metrology.Center.Domain.SafetyOrgsUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Metrology.Center.Domain.Server\Metrology.Center.Domain.Server.csproj">
+      <Project>{58aec493-90af-4386-ad7c-106023f1f622}</Project>
+      <Name>Metrology.Center.Domain.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Metrology.Server.Persistence\Metrology.Server.Persistence.csproj">
+      <Project>{bd98b45b-a8dd-434b-937f-ed97ce86e8ac}</Project>
+      <Name>Metrology.Server.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Metrology.Shared.Core\Metrology.Shared.Core.csproj">
+      <Project>{5d5c427f-038d-413a-9b2d-0f4d06864fbc}</Project>
+      <Name>Metrology.Shared.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
